@@ -14,6 +14,26 @@
             "id": "@sap/generator-fiori:basic",
             "version": "1.15.5",
             "toolsId": "006916ed-06f0-49ca-bb0e-066f8028a08b"
+        },
+        "dataSources": {
+            "ZSRVB_KAUI5_CAD_TURMA_Annotation": {
+                "uri": "/destinations/ABAPTrial/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSRVB_KAUI5_CAD_TURMA_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZSRVB_KAUI5_CAD_TURMA_Annotation.xml"
+                }
+            },
+            "ZSRVB_KAUI5_CAD_TURMA": {
+                "uri": "/sap/opu/odata/sap/ZSRVB_KAUI5_CAD_TURMA",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZSRVB_KAUI5_CAD_TURMA_Annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
         }
     },
     "sap.ui": {
@@ -50,6 +70,18 @@
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
                     "bundleName": "mentoria.fiori.ka.zkanoteapp242.i18n.i18n"
+                }
+            },
+            "": {
+                "preload": true,
+                "dataSource": "ZSRVB_KAUI5_CAD_TURMA",
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
                 }
             }
         },

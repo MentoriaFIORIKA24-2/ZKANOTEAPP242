@@ -29,3 +29,9 @@ server:
       afterMiddleware: compression
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /sap
+            url: https://23bf02f0-9d4d-4fe7-ae57-cab54ffafb1e.abap.us10.hana.ondemand.com
+            destination: ABAPTrial
+            scp: true
+            authenticationType: OAuth2UserTokenExchange
