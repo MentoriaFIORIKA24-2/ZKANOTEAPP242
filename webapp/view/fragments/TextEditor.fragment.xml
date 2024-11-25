@@ -1,0 +1,6 @@
+<c:FragmentDefinition xmlns="sap.m"
+    xmlns:richtexteditor="sap.ui.richtexteditor"
+    xmlns:c="sap.ui.core">
+
+    <richtexteditor:RichTextEditor sanitizeValue="false" value="{app>/richValue}"/>
+</c:FragmentDefinition>

@@ -1,0 +1,28 @@
+<mvc:View  controllerName="mentoria.fiori.ka.zkanoteapp242.controller.Task"
+    xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" xmlns:c="sap.ui.core"
+    xmlns="sap.m" displayBlock="true" height="100%" busyIndicatorDelay="0">
+    <Page title="Tarefas" >
+
+        <l:HorizontalLayout  >
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                <f:content>
+                    <Label text="Título" />
+                    <Input id="titleAtividade" />
+                </f:content>
+            </f:SimpleForm>
+
+            <List items="{path: '/ZC_KAUI5_ATIVIDADES' }" updateFinished="onListUpdate">
+                <StandardListItem title="{Title}"/>
+            </List>
+        </l:HorizontalLayout>
+
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Salvar" press="onSave" type="Emphasized"/>
+            </Toolbar>
+        </footer>
+    </Page>
+
+</mvc:View>

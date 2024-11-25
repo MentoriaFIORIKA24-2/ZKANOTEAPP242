@@ -53,7 +53,7 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
         "dependencies": {
             "minUI5Version": "1.130.0",
             "libs": {
@@ -106,17 +106,24 @@
             },
             "routes": [
                 {
-                    "name": "RouteMain",
-                    "pattern": ":?query:",
-                    "target": [
-                        "TargetMain"
-                    ]
+                    "name": "Main",
+                    "pattern": "",
+                    "target": "Main"
+                },
+                {
+                    "name": "Task",
+                    "pattern": "Task",
+                    "target": "Task"
                 }
             ],
             "targets": {
-                "TargetMain": {
+                "Main": {
                     "id": "Main",
                     "name": "Main"
+                },
+                "Task": {
+                    "id": "Task",
+                    "name": "Task"
                 }
             }
         },

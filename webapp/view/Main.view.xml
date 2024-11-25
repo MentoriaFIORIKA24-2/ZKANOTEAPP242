@@ -1,6 +1,9 @@
 <mvc:View controllerName="mentoria.fiori.ka.zkanoteapp242.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page title="Alunos">
+        <List items="{path: '/ZC_KAUI5_ALUNO' }">
+            <StandardListItem title="{Title}"/>
+        </List>
     </Page>
 </mvc:View>
