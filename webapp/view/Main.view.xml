@@ -1,9 +1,59 @@
 <mvc:View controllerName="mentoria.fiori.ka.zkanoteapp242.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
     xmlns="sap.m">
-    <Page title="Alunos">
-        <List items="{path: '/ZC_KAUI5_ALUNO' }">
-            <StandardListItem title="{Title}"/>
-        </List>
+    <Page title="{i18n>title}" id="BrunoFranca">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormToolbar" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"	 emptySpanM="0"	 emptySpanS="0"	 columnsXL="2" columnsL="1"	 columnsM="1" singleContainerFullSize="false" ariaLabelledBy="Title1" >
+			<f:content>
+				<Toolbar ariaLabelledBy="Title2">
+					<Title id="Title2" text="New Record"/>
+					<ToolbarSpacer />
+					<Button text="Save" icon="sap-icon://save" type="Success" press="onSaveRegister"/>
+				</Toolbar>
+				<Label text="Id Aluno" />
+				<Input value="{Idaluno}" />
+				<Label text="Name" />
+				<Input value="{Name}">
+				</Input>
+				<Label text="Url Photo" />
+				<Input value="{Photo}">
+				</Input>
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+    <HBox>
+        <l:HorizontalLayout >
+            <f:SimpleForm id="SimpleFormToolbar2">
+                <Table noDataText="No record found" id="idTable" items="{/ZC_KAUI5_ALUNO}" mode="SingleSelectMaster" headerText="List Students" selectionChange="onNavToDetail">
+                    <columns>
+                        <Column id="Idtarefa" importance="High">
+                            <header>
+                                <Label text="ID Tarefa" />
+                            </header>
+                        </Column>
+                        <Column id="Idaluno">
+                            <header>
+                                <Label text="ID Aluno" />
+                            </header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            
+                        </ColumnListItem>
+                    </items>                
+                </Table>
+            </f:SimpleForm>
+            </l:HorizontalLayout>
+        </HBox>
+        <footer>
+            <OverflowToolbar id="idToolBar2">
+                <ToolbarSpacer />
+                <Button text="Salvar" icon="sap-icon://save" type="Success" press="onSaveAll" width="10%" />
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
