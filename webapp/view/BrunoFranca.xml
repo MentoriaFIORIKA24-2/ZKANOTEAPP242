@@ -40,30 +40,52 @@
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
-    <VBox class="sapUiSmallMargin">
-        <Table noDataText="No record found" ariaLabelledBy="Title1"  id="listTable" items="{/ZC_KAUI5_ALUNO}" mode="SingleSelectMaster" headerText="List Students" selectionChange="onNavToDetail">
-            <columns>
-                <Column id="Idtarefa" importance="High">
-                    <header>
-                        <Label text="Id Tarefa" />
-                    </header>
-                </Column>
-                <Column id="Idaluno">
-                    <header>
-                        <Label text="Id Aluno" />
-                    </header>
-                </Column>              
-            </columns>
-            <items>
-                <ColumnListItem>
-                    <cells>
-                        <Text text="{Idtarefa}" />
-                        <Text text="{Idaluno}" />
-                    </cells>
-                </ColumnListItem>
-            </items>                
-        </Table>
-    </VBox>
-
+    <HBox>
+        <l:HorizontalLayout >
+            <f:SimpleForm id="SimpleFormToolbar2"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="3"
+                labelSpanM="4"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                ariaLabelledBy="Title1" >
+                <Table noDataText="No record found" id="idTable" items="{/ZC_KAUI5_ALUNO}" mode="SingleSelectMaster" headerText="Lista de Alunos" selectionChange="onNavToDetail" width="100%">
+                    <columns>
+                        <Column id="idTarefa" importance="High">
+                            <header>
+                                <Label text="Tarefa" />
+                            </header>
+                        </Column>
+                        <Column id="Idaluno">
+                            <header>
+                                <Label text="ID do Aluno" />
+                            </header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            
+                        </ColumnListItem>
+                    </items>                
+                </Table>
+            </f:SimpleForm>
+            </l:HorizontalLayout>
+        </HBox>
+        <footer>
+            <OverflowToolbar id="idToolBar2">
+                <ToolbarSpacer />
+                <Button text="Salvar" icon="sap-icon://save" type="Success" press="onSave" width="10%" />
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
