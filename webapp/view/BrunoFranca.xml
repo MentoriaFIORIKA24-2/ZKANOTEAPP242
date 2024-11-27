@@ -43,33 +43,21 @@
     <VBox class="sapUiSmallMargin">
         <Table noDataText="No record found" ariaLabelledBy="Title1"  id="listTable" items="{/ZC_KAUI5_ALUNO}" mode="SingleSelectMaster" headerText="List Students" selectionChange="onNavToDetail">
             <columns>
-                <Column id="Idaluno" importance="High">
+                <Column id="Idtarefa" importance="High">
+                    <header>
+                        <Label text="Id Tarefa" />
+                    </header>
+                </Column>
+                <Column id="Idaluno">
                     <header>
                         <Label text="Id Aluno" />
                     </header>
-                </Column>
-                <Column id="Name">
-                    <header>
-                        <Label text="Name" />
-                    </header>
-                </Column>
-                <Column id="Photo">
-                    <header>
-                        <Label text="URL Photo" />
-                    </header>
-                </Column>                
+                </Column>              
             </columns>
             <items>
                 <ColumnListItem>
                     <cells>
-                        <HBox>
-                            <Image src="{Photo}" class="sapMUSTItemImage sapMUSTItemIcon" visible="{= ${Photo} !== undefined}" />
-                            <core:Icon src="{parts: ['documents>mediaType', 'documents>fileName'] }" color="white" visible="{= ${Photo} === undefined || ${Photo} === '' }" class="sapMUSTItemImage sapMUSTItemIcon" />
-                            <VBox class="sapUiTinyMargin sapUiSmallMarginBegin"  >
-                                <Text text="{Name}" />
-                                <Link text="{Photo}" press="openPreview" class="sapUiTinyMarginBottom"/>
-                            </VBox>
-                        </HBox>
+                        <Text text="{Idtarefa}" />
                         <Text text="{Idaluno}" />
                     </cells>
                 </ColumnListItem>
