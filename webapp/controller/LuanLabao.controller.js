@@ -8,24 +8,34 @@ sap.ui.define([
     return Controller.extend("mentoria.fiori.ka.zkanoteapp242.controller.LuanLabao", {
         onInit() {
             var oCadastro = new JSONModel({
-                "Idaluno": '',
-                "Name": '',
-                "Photo":''
+                Idaluno: '',
+                Name: '',
+                Photo:''
+            })
+
+            var oApp = new JSONModel({
+                richValue: ''
+            })
+
+            var oResposta = new JSONModel({
+				IdTarefa :'',
+				IdAluno:'',
+                RespostaBody: ''
             })
             
-            this.getView().setModel(oCadastro,"oCadastro");            
-            //let sPath= "/FlightSet(Carrid='AA',Connid='0017',Fldate=datetime'2024-05-23T00%3A00%3A00')";
-            //this.getView().bindElement(sPath);
-            //this.byId("IdFormCreate").bindElement(oCadastro);
+            this.getView().setModel(oCadastro,"oCadastro");    
+            this.getView().setModel(oApp,"app");  
+            this.getView().setModel(oResposta,"oResposta");                  
+
         },
         
-        onSave: function () {
+        onCadAluno: function () {
             var oModel = this.getOwnerComponent().getModel();
             var oCadastro = this.getView().getModel("oCadastro");
             
-            console.log(oCadastro.oData.Idaluno);
-            console.log(oCadastro.oData.Name);
-            console.log(oCadastro.oData.Photo);
+            console.log("Idaluno:" + oCadastro.oData.Idaluno);
+            console.log("Name:" + oCadastro.oData.Name);
+            console.log("Photo:" + oCadastro.oData.Photo);
 
             oModel.create("/ZC_KAUI5_ALUNO ", oCadastro.oData, {
                 success: function (oReturn) {
@@ -35,37 +45,58 @@ sap.ui.define([
                     console.log(oReturn)
                 }
             })
+        },
+        onMostraResposta: function (oEvent){
+            var oTable = this.getView().byId("listTableAtividade");
+            var oWidth = oTable.getWidth();
+            var oApp = this.getView().getModel("app");
+            var oRespostaApp = this.getView().getModel("oResposta");
 
-          /*  var oData = {
-                Idturma: "FIORI_24_2",
-                Idtarefa: (this.lastIdtarefa + 1).toString(),
-                Title: this.byId("titleAtividade").getValue()
-            }
 
-            oModel.create("/ZC_KAUI5_ATIVIDADES", oData, {
-                success: function (oReturn) {
-                    alert("OK")
-                },
-                error: function (oReturn) {
-                    alert("Erro")
-                }
-            })*/
+            if(oWidth == '700px') {
+                oTable.setWidth('100%') 
+                oApp.setProperty("/richValue", "");
+           }else{
+                oTable.setWidth('700px') 
 
+                var oItem = oEvent.getSource().getBindingContext().getObject(),
+                sIdTarefa = oItem.Idtarefa,
+                sId       = 'THVhbkxhYmFv',
+                oModel = this.getOwnerComponent().getModel();
+
+                var sId_ = atob(sId);
+
+                oModel.read("/ZC_KAUI5_RESPOSTAS(IdTarefa='" + sIdTarefa + "',IdAluno='"+ sId_ +"')", {
+                    success: function (oReturn) {
+                        console.log(oReturn)
+                        oTable.setBusy(false);
+    
+                        oApp.setProperty("/richValue", oReturn.RespostaBody);
+                        oRespostaApp.setProperty("/IdTarefa", sIdTarefa);
+                        oRespostaApp.setProperty("/IdAluno", sId_);
+                        oRespostaApp.setProperty("/RespostaBody", 'true');
+                        
+                    },
+                    error: function (oReturn) {
+                        console.log(oReturn)
+                        oTable.setBusy(false);
+                        oRespostaApp.setProperty("/IdTarefa", sIdTarefa);
+                        oRespostaApp.setProperty("/IdAluno", sId_);                        
+                    }
+                })   
+           }
         },
 
-		onPressBook:function(oEvent){
-			var oDataLine = oEvent.getSource();
-            var connid = oEvent.getSource().data("Connid");
-            var fldate = oEvent.getSource().data("Fldate");
+		onSalvaResposta:function(oEvent){
 
-			var oDataModel = this.getOwnerComponent().getModel();
+            var oModel = this.getOwnerComponent().getModel();
+            var oApp = this.getView().getModel("app");
+            var oRespostaApp = this.getView().getModel("oResposta");
 
 			var oEntry = {
-				Carrid:oDataLine.Carrid,
-				Connid:oDataLine.Connid,
-				Fldate:oDataLine.Fldate,
-                Seatsmax:333,
-                Seatsocc:333
+				IdTarefa :oRespostaApp.oData.IdTarefa,
+				IdAluno:oRespostaApp.oData.IdAluno,
+                RespostaBody: oApp.oData.richValue
 			}
 
 			var sParameter = {
@@ -73,14 +104,22 @@ sap.ui.define([
 				error: this._handleError,
 			}
 
-			oDataModel.create("/UX_C_Booking_TP", oEntry, sParameter)
+            if(oRespostaApp.oData.RespostaBody == 'true'){
+                oModel.update("/ZC_KAUI5_RESPOSTAS(IdTarefa='"+ oRespostaApp.oData.IdTarefa +"',IdAluno='"+ oRespostaApp.oData.IdAluno +"')", oEntry, sParameter)
+            }else{
+                oModel.create("/ZC_KAUI5_RESPOSTAS", oEntry, sParameter)
+            }
+
 		},
 		_handleSuccess:function(oData){
-			console.log(oData.Carrid);
+			console.log(oData);
 		},
 		_handleError:function(oError){
 			var errorMsg = JSON.parse(oError.responseText)
 			console.log(errorMsg);
-		}
+		},
+        myRichStatus: function (sText) {
+            return sText.length > 0 ? true : false;
+        }
     });
 });

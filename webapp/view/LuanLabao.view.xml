@@ -1,12 +1,14 @@
-<mvc:View xmlns:cards="sap.f.cards" controllerName="mentoria.fiori.ka.zkanoteapp242.controller.LuanLabao"
+<mvc:View xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" 
+    controllerName="mentoria.fiori.ka.zkanoteapp242.controller.LuanLabao"
+    xmlns:cards="sap.f.cards"
     xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
     xmlns="sap.m">
     <Page id="LuanLabao" title="{i18n>title}">
-       
-        	<VBox class="sapUiSmallMargin">
+
+        	<VBox class="sapUiSmallMargin" >
                 <f:Form id="IdFormCreate" editable="true">
                     <f:title>
                         <core:Title text="Cadastrar Aluno" />
@@ -46,55 +48,58 @@
                 </f:Form>
                 <OverflowToolbar id="idToolBar">
                     <ToolbarSpacer/>
-                    <Button type="Emphasized" text="Salvar" press="onSave" />
+                    <Button type="Emphasized" text="Cadastrar Aluno" press="onCadAluno" />
                    
                 </OverflowToolbar>
             </VBox>
-            <VBox class="sapUiSmallMargin">
-                <Table noDataText="Sem informações no momento..." id="listTable" items="{/ZC_KAUI5_ALUNO}" mode="SingleSelectMaster" headerText="Lista de Alunos" selectionChange="onNavToDetail">
-                    <columns>
-                        <Column id="fileName" importance="High">
-                            <header>
-                                <Label text="Aluno" />
-                            </header>
-                        </Column>
-                        <Column id="id">
-                            <header>
-                                <Label text="ID" />
-                            </header>
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem>
-                            <cells>
-                                <HBox>
-                                    <Image
-                                        src="{Photo}"
-                                        class="sapMUSTItemImage sapMUSTItemIcon"
-                                        visible="{= ${Photo} !== undefined}"
-                                    />
-                                    <core:Icon
-                                        src="{parts: ['documents>mediaType', 'documents>fileName'] }"
-                                        color="white"
-                                        visible="{= ${Photo} === undefined || ${Photo} === '' }"
-                                        class="sapMUSTItemImage sapMUSTItemIcon"
-                                    />
-                                    <VBox class="sapUiTinyMargin sapUiSmallMarginBegin"  >
-                                    
-                                        <Text text="{Name}" />
-                                        <Link
-                                            text="{Photo}"
-                                            press="openPreview"
-                                            class="sapUiTinyMarginBottom"
-                                        />
-                                    </VBox>
-                                </HBox>
-                                <Text text="{Idaluno}" />
-                            </cells>
-                        </ColumnListItem>
-                    </items>                
-                </Table>
-            </VBox>
-     
+
+            	<l:HorizontalLayout class="sapUiContentPadding" >
+                        <Table noDataText="Sem informações no momento..." id="listTableAtividade" items="{/ZC_KAUI5_ATIVIDADES}" mode="SingleSelectMaster" headerText="Lista de Tarefa" >
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Tarefa" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Turma" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Titulo" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Ação" />
+                                    </header>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{Idtarefa}" />
+                                        <Text text="{Idturma}" />
+                                        <Text text="{Title}" />
+                                        <Button type="Emphasized" text="Resposta" press="onMostraResposta" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>                
+                        </Table>
+                            <core:Fragment fragmentName="mentoria.fiori.ka.zkanoteapp242.view.fragments.TextEditor"  />
+                       <!--  <VBox visible="{path:'app>/richValue', formatter:'.myRichStatus'}" >
+                        </VBox>-->
+                    
+                </l:HorizontalLayout>
+                
+         
+            <footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+                    <Button text="Salvar" icon="sap-icon://save" type="Success" press="onSalvaResposta" width="10%" />
+                </OverflowToolbar>
+            </footer>
     </Page>
 </mvc:View>
