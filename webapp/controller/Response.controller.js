@@ -13,9 +13,6 @@ sap.ui.define([
        * @override
        */
       onAfterRendering: function() {
-        
-        var response = this.getView().getModel("app").getProperty("/richValue");
-        alert(response);
       
       }
   
