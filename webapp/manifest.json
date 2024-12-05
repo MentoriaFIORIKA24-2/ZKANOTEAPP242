@@ -58,7 +58,8 @@
             "minUI5Version": "1.130.0",
             "libs": {
                 "sap.m": {},
-                "sap.ui.core": {}
+                "sap.ui.core": {},
+                "sap.f": {}
             }
         },
         "contentDensities": {
@@ -78,7 +79,7 @@
                 "settings": {
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
-                    "refreshAfterChange": false,
+                    "refreshAfterChange": true,
                     "metadataUrlParams": {
                         "sap-value-list": "none"
                     }
@@ -94,43 +95,83 @@
         },
         "routing": {
             "config": {
-                "routerClass": "sap.m.routing.Router",
-                "controlAggregation": "pages",
-                "controlId": "app",
-                "transition": "slide",
-                "type": "View",
-                "viewType": "XML",
-                "path": "mentoria.fiori.ka.zkanoteapp242.view",
-                "async": true,
-                "viewPath": "mentoria.fiori.ka.zkanoteapp242.view"
+                "routerClass": "sap.f.routing.Router",
+				"viewType": "XML",
+				"viewPath": "mentoria.fiori.ka.zkanoteapp242.view",
+				"controlId": "flexibleColumnLayout",
+				"transition": "slide",
+				"async": true
             },
             "routes": [
                 {
                     "name": "Main",
                     "pattern": "",
-                    "target": "Main"
+                    "target": [
+                        "Main", "LuanLabao"
+                    ]
                 },
                 {
                     "name": "Task",
-                    "pattern": "Task",
-                    "target": "Task"
+                    "pattern": "Task/{layout}",
+                    "target": [
+                        "Main", "Task"
+                    ]
+                },
+                {
+                    "name": "Response",
+                    "pattern": "Response/{layout}",
+                    "target": [
+                        "Main", "LuanLabao", "Response"
+                    ]
+                },
+                {
+                    "name": "LuanLabao",
+                    "pattern": "LuanLabao/{layout}",
+                    "target": [
+                        "Main", "LuanLabao"
+                    ]
+                },
+                {
+                    "name": "BrunoFSilva",
+                    "pattern": "BrunoFSilva",
+                    "target": "BrunoFSilva"
+                },
+                {
+                    "name": "BrunoFranca",
+                    "pattern": "BrunoFranca",
+                    "target": "BrunoFranca"
                 }
             ],
             "targets": {
                 "Main": {
-                    "id": "Main",
-                    "name": "Main"
+                    "viewName": "Main",
+					"controlAggregation": "beginColumnPages"
                 },
                 "Task": {
-                    "id": "Task",
-                    "name": "Task"
+                    "viewName": "Task",
+                    "controlAggregation": "midColumnPages"
+                },
+                "Response": {
+                    "viewName": "Response",
+					"controlAggregation": "endColumnPages"
+                },
+                "LuanLabao": {
+                    "viewName": "LuanLabao",
+                    "controlAggregation": "midColumnPages"
+                },
+                "BrunoFSilva": {
+                    "viewName": "BrunoFSilva"
+                },
+                "BrunoFranca": {
+                    "viewName": "BrunoFranca"
                 }
             }
         },
         "rootView": {
             "viewName": "mentoria.fiori.ka.zkanoteapp242.view.App",
             "type": "XML",
-            "id": "App"
+            "async": true,
+            "id": "flexibleColumnLayout"
         }
     }
 }

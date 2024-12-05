@@ -1,7 +1,6 @@
-<mvc:View controllerName="mentoria.fiori.ka.zkanoteapp242.controller.App"
-    displayBlock="true"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <App id="app">               
-    </App>
+<mvc:View controllerName="mentoria.fiori.ka.zkanoteapp242.controller.App" displayBlock="true" height="100%"
+    xmlns="sap.f"
+    xmlns:mvc="sap.ui.core.mvc">
+    <FlexibleColumnLayout id="flexibleColumnLayout" layout="{app>/layout}" backgroundDesign="Solid"/>
+
 </mvc:View>
